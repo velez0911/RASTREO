@@ -1,0 +1,24 @@
+CREATE DATABASE IF NOT EXISTS gym_app;
+USE gym_app;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS registros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    fecha DATE NOT NULL,
+    musculo VARCHAR(50) NOT NULL,
+    ejercicio VARCHAR(100) NOT NULL,
+    peso DECIMAL(8,2) NOT NULL,
+    repeticiones INT NOT NULL,
+    rpe INT DEFAULT NULL,
+    notas TEXT,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
